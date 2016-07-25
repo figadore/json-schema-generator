@@ -1,0 +1,20 @@
+---
+$schema: http://json-schema.org/draft-04/hyper-schema
+title: Color
+description: Color
+stability: Alpha
+strictProperties: true
+additionalProperties: false
+type:
+  - string
+enum:
+  - gray
+  - grey
+  - silver
+  - black
+  - white
+  - yellow
+  - blue
+  - red
+  - green
+id: color

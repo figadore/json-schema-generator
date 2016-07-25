@@ -1,0 +1,13 @@
+---
+$schema: http://json-schema.org/draft-04/hyper-schema
+title: Cars
+description: Array of Cars
+stability: Alpha
+strictProperties: true
+additionalProperties: false
+definitions:
+type:
+  - array
+items:
+  $ref: car
+id: schemata/event

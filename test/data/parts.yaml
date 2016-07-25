@@ -1,0 +1,25 @@
+---
+$schema: http://json-schema.org/draft-04/hyper-schema
+title: Parts
+description: Collection of common parts
+stability: Alpha
+strictProperties: true
+additionalProperties: false
+definitions:
+  wheel:
+    type: object
+    description: Wheel
+    required:
+      - color
+    properties:
+      color:
+        $ref: color
+  engine:
+    description: engine
+    type: string
+    enum:
+      - "4 cylinder"
+      - "6 cylinder"
+type:
+  - object
+id: parts
