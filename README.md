@@ -100,35 +100,85 @@ schemagen ./window.yaml
 
 ### Output
 ```
-{ '$schema': 'http://json-schema.org/draft-04/hyper-schema',
-  id: 'window',
-  title: 'Window',
-  strictProperties: true,
-  additionalProperties: false,
-  definitions:
-   { style: { type: [ 'string' ], enum: [ 'georgian', 'center bar' ] },
-     size:
-      { '$schema': 'http://json-schema.org/draft-04/hyper-schema',
-        id: 'size',
-        title: 'Size',
-        description: 'Length and width',
-        strictProperties: true,
-        additionalProperties: false,
-        definitions:
-         { width: { type: 'integer', minimum: 1, maximum: 100 },
-           height: { type: 'integer', minimum: 1, maximum: 100 },
-           units: { type: 'string', enum: [ 'inches', 'centimeters' ] } },
-        type: [ 'object' ],
-        required: [ 'width', 'height', 'units' ],
-        properties:
-         { height: { '$ref': '#/definitions/size/definitions/height' },
-           width: { '$ref': '#/definitions/size/definitions/width' },
-           units: { '$ref': '#/definitions/size/definitions/units' } } } },
-  type: [ 'object' ],
-  required: [ 'size', 'style' ],
-  properties:
-   { style: { '$ref': '#/definitions/style' },
-     size: { '$ref': '#/definitions/size' } } }
+{  
+   "$schema":"http://json-schema.org/draft-04/hyper-schema",
+   "id":"window",
+   "title":"Window",
+   "strictProperties":true,
+   "additionalProperties":false,
+   "definitions":{  
+      "style":{  
+         "type":[  
+            "string"
+         ],
+         "enum":[  
+            "georgian",
+            "center bar"
+         ]
+      },
+      "size":{  
+         "$schema":"http://json-schema.org/draft-04/hyper-schema",
+         "id":"size",
+         "title":"Size",
+         "description":"Length and width",
+         "strictProperties":true,
+         "additionalProperties":false,
+         "definitions":{  
+            "width":{  
+               "type":"integer",
+               "minimum":1,
+               "maximum":100
+            },
+            "height":{  
+               "type":"integer",
+               "minimum":1,
+               "maximum":100
+            },
+            "units":{  
+               "type":"string",
+               "enum":[  
+                  "inches",
+                  "centimeters"
+               ]
+            }
+         },
+         "type":[  
+            "object"
+         ],
+         "required":[  
+            "width",
+            "height",
+            "units"
+         ],
+         "properties":{  
+            "height":{  
+               "$ref":"#/definitions/size/definitions/height"
+            },
+            "width":{  
+               "$ref":"#/definitions/size/definitions/width"
+            },
+            "units":{  
+               "$ref":"#/definitions/size/definitions/units"
+            }
+         }
+      }
+   },
+   "type":[  
+      "object"
+   ],
+   "required":[  
+      "size",
+      "style"
+   ],
+   "properties":{  
+      "style":{  
+         "$ref":"#/definitions/style"
+      },
+      "size":{  
+         "$ref":"#/definitions/size"
+      }
+   }
+}
 ```
 
 ### Valid data
