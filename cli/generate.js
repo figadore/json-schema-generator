@@ -30,10 +30,6 @@ generator.generate(program.args[0], function onGenerated(err, schema) {
     console.error(err);
     process.exit(1);
   }
-  log(schema);
+  console.log("%j", schema);
   process.exit(0);
 });
-
-function log() {
-  console.dir.call(null, ...arguments, {depth: null});
-}
