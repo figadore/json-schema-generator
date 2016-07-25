@@ -2,6 +2,9 @@
   "scripts": {
     "test": "mocha"
   },
+  "bin": {
+    "schemagen": "./cli/generate.js"
+  },
   "devDependencies": {
     "chai": "~3.4.1",
     "mocha": "^2.4.5",
@@ -9,8 +12,18 @@
     "z-schema": "^3.16.1",
     "nodemon": "^1.8.1"
   },
+  "name": "@shinymayhem/json-schema-generator",
+  "version": "0.1.0",
+  "main": "index.js",
   "dependencies": {
     "clone": "^1.0.2",
+    "commander": "^2.9.0",
     "js-yaml": "^3.6.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://bitbucket.org/shinymayhem/json-schema-generator.git"
+  },
+  "author": "Reese Wilson",
+  "license": "MIT"
 }
