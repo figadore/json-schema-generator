@@ -27,9 +27,10 @@ class Generator {
    *
    * @param {object}      schema         JSON schema object
    * @param {object|null} topLevelSchema Schema to compile references into
+   * @param {string}      subpath        Path to current schema from top level
    * @param {string}      schemaDir      Directory to find schema files in
    */
-  constructor(schema, topLevelSchema, schemaDir) {
+  constructor(schema, topLevelSchema, subpath, schemaDir) {
     this.schemaDir = schemaDir;
     // Keep a list of references and their replacements
     this.references = {};
@@ -41,6 +42,9 @@ class Generator {
       this.topLevelSchema = topLevelSchema;
     }
     this.references[schema.id] = '#';
+    if (subpath) {
+      this.references[schema.id] += subpath;
+    }
     // preserve uncompiled schema?
     this.original = schema;
   }
@@ -67,8 +71,10 @@ class Generator {
     if (key === "$ref") {
       let reference = parseReference(value);
       if (reference.object === '#') {
-        // references self
-        return;
+        // references self. don't allow this, force absolute references
+        let e = new Error("Found reference to self at '" + stack.join(".") + "'. Use object id prefix for all references");
+        e.detail = reference;
+        throw e;
       } else if (this.references[reference.object]) {
         // Reference is already compiled into main schema
           // Replace reference to external schema with one to local definition
@@ -79,9 +85,12 @@ class Generator {
         let schema = yaml.safeLoad(data);
 
         //this.compiled.definitions[reference.object] = schema; //TODO replace with compiled schema
-        let generator = new Generator(schema, this.compiled, this.schemaDir);
+        let generator = new Generator(schema, this.compiled, "/definitions/" + schema.id, this.schemaDir);
         generator.resolveReferences((err, compiled) => {
           // Add compiled schema to definitions of top level schema
+          if (!this.topLevelSchema.definitions) {
+            this.topLevelSchema.definitions = {};
+          }
           this.topLevelSchema.definitions[reference.object] = compiled;
           // Store new path in list of resolved references
           this.references[schema.id] = "#/definitions/" + schema.id;
@@ -103,7 +112,8 @@ class Generator {
     for (let i = 0; i < stack.length; i++) {
       updatable = updatable[stack[i]];
     }
-    updatable.$ref = "#/definitions/" + reference.object;
+    //updatable.$ref = "#/definitions/" + reference.object;
+    updatable.$ref = this.references[reference.object];
     if (reference.path) {
       updatable.$ref += reference.path;
     }
@@ -175,7 +185,7 @@ module.exports = {
       }
       var schema = yaml.safeLoad(data);
       var schemaDir = path.dirname(fileName);
-      var generator = new Generator(schema, null, schemaDir);
+      var generator = new Generator(schema, null, null, schemaDir);
       return generator.resolveReferences(callback);
     });
   }

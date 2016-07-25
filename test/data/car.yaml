@@ -22,9 +22,9 @@ required:
   - color
 properties:
   make:
-    $ref: "#/definitions/make"
+    $ref: car#/definitions/make
   model:
-    $ref: "#/definitions/model"
+    $ref: car#/definitions/model
   engine:
     $ref: parts#/definitions/engine
   wheel:

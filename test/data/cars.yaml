@@ -10,4 +10,4 @@ type:
   - array
 items:
   $ref: car
-id: schemata/event
+id: cars

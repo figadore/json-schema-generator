@@ -50,6 +50,48 @@ describe('Generate', function parserSuite() {
       done(error);
     });
   });
+
+  it("should create schema for array of cars", function test(done) {
+    var data = [
+        {
+          make: "Audi",
+          model: "A6",
+          engine: "6 cylinder",
+          wheel: {
+            color: "black"
+          },
+          color: "gray"
+        },
+        {
+          make: "Scion",
+          model: "xA",
+          engine: "4 cylinder",
+          wheel: {
+            color: "silver"
+          },
+          color: "green"
+        }
+    ];
+    generator.generate('test/data/cars.yaml', function onGenerated(err, schema) {
+      //log({schema});
+      if (err) {
+        console.log(err);
+      }
+      expect(schema).to.have.property('$schema');
+      //log({err, schema});
+      var validator = new ZSchema({});
+      var valid = validator.validate(data, schema);
+      var errors;
+      var error;
+      if (valid !== true) {
+        errors = validator.getLastErrors();
+        log({errors});
+        error = new Error("data not valid against schema:" + JSON.stringify(errors));
+        error.detail = errors;
+      }
+      done(error);
+    });
+  });
 });
 
 /*
