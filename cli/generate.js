@@ -31,6 +31,6 @@ generator.generate(program.args[0], function onGenerated(err, schema) {
     console.error(err);
     process.exit(1);
   }
-  console.log("%j", schema);
+  console.log(JSON.stringify(schema, null, 4));
   process.exit(0);
 });
