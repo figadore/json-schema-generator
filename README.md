@@ -1,8 +1,8 @@
 #JSON Schema Generator
 
-Generate/compile .yaml files into a single JSON schema file. Resolves references to other schema docuements in the same directory
+Generate/compile .yaml files (not .yml at the moment) into a single JSON schema file. Resolves references to other schema docuements in the same directory
 
-Requires Node >= 6.0
+Requires Node >= 5.0
 
 ## Usage
 
