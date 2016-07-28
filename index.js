@@ -41,9 +41,9 @@ class Generator {
     if (topLevelSchema) {
       this.topLevelSchema = topLevelSchema;
     }
-    this.references[schema.id] = '#';
+    this.references[schema.shortName] = '#';
     if (subpath) {
-      this.references[schema.id] += subpath;
+      this.references[schema.shortName] += subpath;
     }
     // preserve uncompiled schema?
     this.original = schema;
@@ -85,7 +85,7 @@ class Generator {
         let schema = yaml.safeLoad(data);
 
         //this.compiled.definitions[reference.object] = schema; //TODO replace with compiled schema
-        let generator = new Generator(schema, this.compiled, "/definitions/" + schema.id, this.schemaDir);
+        let generator = new Generator(schema, this.compiled, "/definitions/" + schema.shortName, this.schemaDir);
         generator.resolveReferences((err, compiled) => {
           // Add compiled schema to definitions of top level schema
           if (!this.topLevelSchema.definitions) {
@@ -93,7 +93,7 @@ class Generator {
           }
           this.topLevelSchema.definitions[reference.object] = compiled;
           // Store new path in list of resolved references
-          this.references[schema.id] = "#/definitions/" + schema.id;
+          this.references[schema.shortName] = "#/definitions/" + schema.shortName;
           // Replace reference to external schema with one to local definition
           this.replaceReference(stack, reference);
         });
@@ -172,9 +172,9 @@ function parseReference(value) {
   return parsed;
 }
 
-function log() {
-  console.dir.call(null, ...arguments, {depth: null});
-}
+//function log() {
+//  console.dir.call(null, ...arguments, {depth: null});
+//}
 
 // Public
 module.exports = {
