@@ -1,5 +1,6 @@
 ---
 $schema: http://json-schema.org/draft-04/hyper-schema
+shortName: cars
 title: Cars
 description: Array of Cars
 stability: Alpha
@@ -10,4 +11,3 @@ type:
   - array
 items:
   $ref: car
-id: cars

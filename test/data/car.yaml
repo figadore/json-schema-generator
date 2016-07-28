@@ -1,5 +1,6 @@
 ---
 $schema: http://json-schema.org/draft-04/hyper-schema
+shortName: car
 title: Car
 description: Car
 stability: Alpha
@@ -31,4 +32,3 @@ properties:
     $ref: parts#/definitions/wheel
   color:
     $ref: color
-id: car

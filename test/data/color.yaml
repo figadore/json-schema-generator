@@ -1,5 +1,6 @@
 ---
 $schema: http://json-schema.org/draft-04/hyper-schema
+shortName: color
 title: Color
 description: Color
 stability: Alpha
@@ -17,4 +18,3 @@ enum:
   - blue
   - red
   - green
-id: color

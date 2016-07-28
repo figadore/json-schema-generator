@@ -56,6 +56,7 @@ class Generator {
       this.compile(stack, key, value);
     });
 
+    //log({compiled: this.compiled});
     callback(null, this.compiled);
   }
 
@@ -85,7 +86,7 @@ class Generator {
         let schema = yaml.safeLoad(data);
 
         //this.compiled.definitions[reference.object] = schema; //TODO replace with compiled schema
-        let generator = new Generator(schema, this.compiled, "/definitions/" + schema.shortName, this.schemaDir);
+        let generator = new Generator(schema, this.topLevelSchema, "/definitions/" + schema.shortName, this.schemaDir);
         generator.resolveReferences((err, compiled) => {
           // Add compiled schema to definitions of top level schema
           if (!this.topLevelSchema.definitions) {
@@ -173,7 +174,7 @@ function parseReference(value) {
 }
 
 //function log() {
-//  console.dir.call(null, ...arguments, {depth: null});
+  //console.dir.call(null, ...arguments, {depth: null});
 //}
 
 // Public

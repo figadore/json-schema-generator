@@ -1,5 +1,6 @@
 ---
 $schema: http://json-schema.org/draft-04/hyper-schema
+shortName: parts
 title: Parts
 description: Collection of common parts
 stability: Alpha
@@ -22,4 +23,3 @@ definitions:
       - "6 cylinder"
 type:
   - object
-id: parts
