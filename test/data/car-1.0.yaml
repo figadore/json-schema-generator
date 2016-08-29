@@ -1,0 +1,34 @@
+---
+$schema: http://json-schema.org/draft-04/hyper-schema
+shortName: car-1.0
+title: Car
+description: Car
+stability: Alpha
+strictProperties: true
+additionalProperties: false
+definitions:
+  make:
+    type: string
+    description: Brand name
+  model:
+    type: string
+    description: Model name
+type:
+  - object
+required:
+  - make
+  - model
+  - engine
+  - wheel
+  - color
+properties:
+  make:
+    $ref: car-1.0#/definitions/make
+  model:
+    $ref: car-1.0#/definitions/model
+  engine:
+    $ref: parts-1.0#/definitions/engine
+  wheel:
+    $ref: parts-1.0#/definitions/wheel
+  color:
+    $ref: color-1.0

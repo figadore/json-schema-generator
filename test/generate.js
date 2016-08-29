@@ -92,6 +92,37 @@ describe('Generate', function parserSuite() {
       done(error);
     });
   });
+
+  it("should work with versions", function test(done) {
+    var data = {
+      make: "Audi",
+      model: "A6",
+      engine: "4 cylinder",
+      wheel: {
+        color: "black"
+      },
+      color: "gray"
+    };
+    generator.generate('test/data/car-1.0.yaml', function onGenerated(err, schema) {
+      //log({schema});
+      if (err) {
+        console.log(err);
+      }
+      expect(schema).to.have.property('$schema');
+      //log({err, schema});
+      var validator = new ZSchema({});
+      var valid = validator.validate(data, schema);
+      var errors;
+      var error;
+      if (valid !== true) {
+        errors = validator.getLastErrors();
+        log({errors});
+        error = new Error("data not valid against schema:" + JSON.stringify(errors));
+        error.detail = errors;
+      }
+      done(error);
+    });
+  });
 });
 
 /*
