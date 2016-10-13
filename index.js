@@ -92,6 +92,8 @@ class Generator {
           if (!this.topLevelSchema.definitions) {
             this.topLevelSchema.definitions = {};
           }
+          // Remove subschema's id, as it is now part of the compiled schema
+          delete compiled.id;
           this.topLevelSchema.definitions[reference.object] = compiled;
           // Store new path in list of resolved references
           this.references[schema.shortName] = "#/definitions/" + schema.shortName;
